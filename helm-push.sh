@@ -35,6 +35,8 @@ fi
 # extract the chart name from the Chart.yaml
 CHART_ROOT="$(realpath ${1})"
 NAME=$(sed -n '/^name: */s///p' "${CHART_ROOT}/Chart.yaml")
+# ,, converts to lowercase - required for helm chart OCI URLS
+REGISTRY_FOLDER=${REGISTRY_FOLDER,,}
 CHART=oci://${REGISTRY_FOLDER}/${NAME}
 
 # TAG defaults to todays date and beta number as time of day
